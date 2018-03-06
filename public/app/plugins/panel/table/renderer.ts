@@ -105,13 +105,12 @@ export class TableRenderer {
         if (column.style.valueMappings && column.style.mappingType && column.style.mappingType === 1) {
           for (let i = 0; i < column.style.valueMappings.length; i++) {
             let mapping = column.style.valueMappings[i];
-            var value = kbn.stringToJsRegex(mapping.value);
+            var value = Number(mapping.value);
             if (v === null && mapping.value[0] === 'null') {
               return mapping.text;
             }
-            if (v !== null) {
-              var tmpV = this.sanitize(v);
-              if (tmpV.match(value)) {
+            if (v !== null && !_.isArray(v)) {
+              if (Number(v) === value) {
                 if (!_.isString(v) && !_.isArray(v)) {
                   this.colorState[column.style.colorMode] = this.getColorForValue(v, column.style);
                 }
