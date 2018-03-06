@@ -15,8 +15,8 @@ describe('when rendering table', () => {
       { text: 'Sanitized' },
       { text: 'Link' },
       { text: 'Array' },
-      { text: 'Value mapping' },
-      { text: 'Range mapping' },
+      { text: 'Mapping' },
+      { text: 'RangeMapping' },
     ];
     table.rows = [[1388556366666, 1230, 40, undefined, '', '', 'my.host.com', 'host1', ['value1', 'value2'], 1, 2]];
 
@@ -50,6 +50,10 @@ describe('when rendering table', () => {
           type: 'string',
         },
         {
+          pattern: 'String',
+          type: 'string',
+        },
+        {
           pattern: 'United',
           type: 'number',
           unit: 'ms',
@@ -75,7 +79,7 @@ describe('when rendering table', () => {
           decimals: 3,
         },
         {
-          pattern: 'Value to text mapping',
+          pattern: 'Mapping',
           type: 'string',
           mappingType: 1,
           valueMappings: [
@@ -90,7 +94,7 @@ describe('when rendering table', () => {
           ],
         },
         {
-          pattern: 'range to text mapping',
+          pattern: 'RangeMapping',
           type: 'string',
           mappingType: 2,
           rangeMappings: [
@@ -228,22 +232,22 @@ describe('when rendering table', () => {
     });
 
     it('value should be mapped to text', () => {
-      var html = renderer.renderCell(9, 0, '1');
+      var html = renderer.renderCell(9, 0, 1);
       expect(html).toBe('<td>on</td>');
     });
 
     it('value should be mapped to text', () => {
-      var html = renderer.renderCell(9, 0, '0');
+      var html = renderer.renderCell(9, 0, 0);
       expect(html).toBe('<td>off</td>');
     });
 
-    it('value should be mapped to text', () => {
-      var html = renderer.renderCell(10, 0, '2');
+    it('value should be mapped to text(range)', () => {
+      var html = renderer.renderCell(10, 0, 2);
       expect(html).toBe('<td>on</td>');
     });
 
-    it('value should be mapped to text', () => {
-      var html = renderer.renderCell(10, 0, '5');
+    it('value should be mapped to text(range)', () => {
+      var html = renderer.renderCell(10, 0, 5);
       expect(html).toBe('<td>off</td>');
     });
   });
